@@ -21,6 +21,7 @@ resource "libvirt_cloudinit_disk" "commoninit" {
   name = "${var.instance_hostname}-${count.index}-commoninit.iso"
   pool = var.instance_libvirt_pool
   user_data = element(data.template_file.user_data.*.rendered, count.index)
+  network_config = element(data.template_file.network_config.*.rendered, count.index)
   #meta_data = data.template_file.meta_data.rendered
 }
 
@@ -41,6 +42,16 @@ data "template_file" "user_data" {
     cloud_user_sshkey = var.instance_cloud_user.sshkey != null ? var.instance_cloud_user.sshkey : ""
     cloud_user_username = var.instance_cloud_user.username
     cloud_user_password = var.instance_cloud_user.password
+  }
+}
+
+data "template_file" "network_config" {
+  count = var.instance_count
+  template = file(var.instance_network_config_path)
+  vars = {
+    instance_address = var.instance_network_address
+    instance_gateway = var.instance_network_gateway
+    instance_nameservers = var.instance_network_nameservers
   }
 }
 

@@ -34,6 +34,12 @@ variable "instance_cloudinit_path" {
   default = "./cloud_init.cfg"
 }
 
+variable "instance_network_config_path" {
+  type = string
+  description = ""
+  default = "./network.cfg"
+}
+
 variable "instance_type" {
   type = string
   description = "Instance type, Windows/Linux"
@@ -120,4 +126,22 @@ variable "instance_network_interfaces" {
   )
   default = []
   description = "A list of network interfaces to add to the instance"
+}
+
+variable "instance_network_address" {
+  type = string
+  description = "The IP address to use for the instance with mask"
+  default = "192.168.1.123/24"
+}
+
+variable "instance_network_gateway" {
+  type = string
+  description = "The gateway to use for the instance"
+  default = "192.168.1.1"
+}
+
+variable "instance_network_nameservers" {
+  type = string
+  description = "A list of nameservers to use for the instance"
+  default = "[8.8.8.8, 8.8.4.4]"
 }
