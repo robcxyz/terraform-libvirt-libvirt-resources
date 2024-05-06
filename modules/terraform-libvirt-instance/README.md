@@ -65,14 +65,14 @@ module "instance_provisioning" {
   instance_uefi_enabled      = true
   instance_network_interfaces = [
     {
-      interface_network_name           = "internal"
+      interface_network        = "internal"
       interface_mac_address    = "52:54:00:12:34:56"
       interface_addresses      = ["192.168.1.2"]
       interface_hostname       = "eth0-host"
       interface_wait_for_lease = true
     },
     {
-      interface_network_name           = "internal"
+      interface_network        = "internal"
       interface_mac_address    = "52:54:00:65:78:9A"
       interface_addresses      = ["192.168.2.2"]
       interface_hostname       = "eth1-host"
